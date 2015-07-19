@@ -47,17 +47,26 @@ public class MainActivity extends ActionBarActivity {
         try {
             dictTextView.setText("The UserDictionary contains ");
             // -- YOUR CODE BELOW HERE -- //
+            dictTextView.append(cursor.getCount() + " words\n");
+            dictTextView.append("_id-frequency-word\n");
+
 
             // Get the index of the column containing the actual words, using
             // UserDictionary.Words.WORD, which is the header of the word column.
+            int idColumn = cursor.getColumnIndex(Words._ID);
             int wordColumn = cursor.getColumnIndex(UserDictionary.Words.WORD);
+            int frequencyColumn = cursor.getColumnIndex(Words.FREQUENCY);
+
+
 
             // Iterates through all returned rows in the cursor.
             while (cursor.moveToNext()) {
                 // Use that index to extract the String value of the word
                 // at the current row the cursor is on.
+                int id = cursor.getInt(idColumn);
+                int frequency = cursor.getInt(frequencyColumn);
                 String word = cursor.getString(wordColumn);
-                dictTextView.append(("\n" + word));
+                dictTextView.append(("\n" +id +"-"+frequency+"-"+word));
             }
         } finally {
             // Always close your cursor to avoid memory leaks
