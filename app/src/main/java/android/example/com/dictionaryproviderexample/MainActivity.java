@@ -20,7 +20,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.provider.UserDictionary.Words;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.support.v4.widget.SimpleCursorAdapter;
 
@@ -28,7 +28,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
  * This is the central activity for the Provider Dictionary Example App. The purpose of this app is
  * to show an example of accessing the {@link Words} list via its' Content Provider.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class MainActivity extends ActionBarActivity {
         // -- YOUR CODE BELOW HERE -- //
 
         // Set the Adapter to fill the standard two_line_list_item layout with data from the Cursor.
-        SimpleCursorAdapter adapter = null;
-
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,android.R.layout.two_line_list_item,cursor,new String[]{Words.WORD,Words.FREQUENCY},new int[]{android.R.id.text1,android.R.id.text2},0);
+        dictListView.setAdapter(adapter);
         // Don't forget to attach the adapter to the ListView
     }
 }
